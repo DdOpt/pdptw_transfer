@@ -14,13 +14,14 @@ instance = Instance(nodes, transfers, requests, travel_time, parameters)
 
 
 first_stage_model = Model(instance)
-first_stage_model.model.setParam('TimeLimit', 60)
+first_stage_model.model.setParam('TimeLimit', 10)
 first_stage_model.model.optimize()
 x = set()
 y = set()
 status = first_stage_model.model.status
 if status == gp.GRB.OPTIMAL or (status == gp.GRB.TIME_LIMIT and first_stage_model.model.SolCount > 0):
     for (i, j) in first_stage_model.x:
+
         if first_stage_model.x[i, j].x > 0.5:
             x.add((i, j))
 

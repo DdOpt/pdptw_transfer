@@ -58,21 +58,24 @@ def get_parcel_flow(x, y, instance):
     for (i, j) in x:
         arcs[i, j] = veh
         vehicles[veh] = (i, j)
+        vehicle_parcel[veh] = []
         if (i, j) in od_to_parcel:
             parcel_without_transfer[od_to_parcel[i, j]] = (i, j)
-            vehicle_parcel[veh] = [od_to_parcel[i, j]]
+            vehicle_parcel[veh].append(od_to_parcel[i, j])
         veh += 1
     parcel_with_transfer = {}
     for (o, t, d) in y:
+        if (o, t) not in x:
+            print(f"{o, t} not in x")
         vehicle_parcel[arcs[o, t]].append(od_to_parcel[o, d])
         vehicle_parcel[arcs[t, d]].append(od_to_parcel[o, d])
         parcel_with_transfer[od_to_parcel[o, d]] = (o, t, d)
-
-    for parcel in parcel_with_transfer:
-        print(parcel, parcel_with_transfer[parcel])
-    for parcel in parcel_without_transfer:
-        print(parcel, parcel_without_transfer[parcel])
-    print(vehicle_parcel)
+    #    print(parcel_with_transfer)
+    # for parcel in parcel_with_transfer:
+    #     print(parcel, parcel_with_transfer[parcel])
+    # for parcel in parcel_without_transfer:
+    #     print(parcel, parcel_without_transfer[parcel])
+    # print(vehicle_parcel)
     return vehicle_parcel, parcel_without_transfer, parcel_with_transfer, vehicles, arcs
 
 
