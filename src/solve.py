@@ -38,7 +38,7 @@ if status == gp.GRB.OPTIMAL or (status == gp.GRB.TIME_LIMIT and first_stage_mode
 
     second_stage_model = Schedule(e, l, pairs, instance, vehicles, arcs)
     second_stage_model.model.setParam('TimeLimit', 120)
-    # second_stage_model.model.optimize()
+    second_stage_model.model.optimize()
 
 else:
     print(status, first_stage_model.model.SolCount)

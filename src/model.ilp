@@ -1,0 +1,11 @@
+\ Model pickup and delivery with transfer_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Minimize
+ 
+Subject To
+ c2_request_0: arc_1_2 = 1
+ c11_t_2_3: 50 arc_1_2 + 50 y_1_2_3 <= 0
+Bounds
+Binaries
+ arc_1_2 y_1_2_3
+End
